@@ -48,12 +48,8 @@ open class CyclingSpeedCadenceService: Service, ServiceProtocol {
                 guard let previous = oldValue else { return }
                 guard let current = measurementData else { return }
                 
-                if let kph = CyclingSerializer.calculateWheelKPH(current, previous: previous, wheelCircumferenceCM: wheelCircumferenceCM, wheelTimeResolution: 1024) {
-                    speedKPH = kph
-                }
-                if let rpm = CyclingSerializer.calculateCrankRPM(current, previous: previous) {
-                    crankRPM = rpm
-                }
+                speedKPH = CyclingSerializer.calculateWheelKPH(current, previous: previous, wheelCircumferenceCM: wheelCircumferenceCM, wheelTimeResolution: 1024)
+                crankRPM = CyclingSerializer.calculateCrankRPM(current, previous: previous)
             }
         }
         
